@@ -2,7 +2,7 @@
   <div id="app bg-black">
     <div id="nav">
       <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
+      <router-link to="/basic-demo">Demo</router-link> |
       <router-link to="/colors">Colors</router-link>
     </div>
     <router-view />
