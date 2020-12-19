@@ -13,6 +13,14 @@
     </div>
     <div class="demo-group">
       <div class="text-2xl mb-4">
+        MultiToggle
+      </div>
+      <div>
+        <MultiToggle v-model="selectedOption" :options="options" />
+      </div>
+    </div>
+    <div class="demo-group">
+      <div class="text-2xl mb-4">
         Responsive Panel Layout
       </div>
       <div
@@ -45,10 +53,31 @@
 <script>
 import DvPanel from "@/components/DvPanel.vue";
 import VSelect from "@/components/VSelect.vue";
+import MultiToggle from "@/components/MultiToggle.vue";
 export default {
   components: {
     DvPanel,
-    VSelect
+    VSelect,
+    MultiToggle
+  },
+  data() {
+    return {
+      selectedOption: 1,
+      options: [
+        {
+          val: 1,
+          label: "One"
+        },
+        {
+          val: 2,
+          label: "Two"
+        },
+        {
+          val: 3,
+          label: "Three"
+        }
+      ]
+    };
   }
 };
 </script>
