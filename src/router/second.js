@@ -27,7 +27,7 @@ const routes = [
   },
   {
     path: "/second-page-only",
-    name: "Second",
+    name: "Second Page Only Route",
     component: Second
   }
 ];

@@ -44,45 +44,18 @@
     <div class="px-8 py-4">
       <div>Links within the same page (vue router)</div>
       <div class="flex space-x-2 ">
-        <router-link
-          class="border p-1 rounded cursor-pointer"
-          to="/"
-          v-slot="{ navigate, isExactActive }"
-          custom
-        >
-          <span :class="{ 'text-blue-500': isExactActive }" @click="navigate"
-            >Home</span
-          >
-        </router-link>
-        <router-link
-          class="border p-1 rounded cursor-pointer"
-          to="/basic-demo"
-          v-slot="{ navigate, isExactActive }"
-          custom
-        >
-          <span :class="{ 'text-blue-500': isExactActive }" @click="navigate"
-            >Demo</span
-          >
-        </router-link>
-        <router-link
-          class="border p-1 rounded cursor-pointer"
-          to="/colors"
-          v-slot="{ navigate, isExactActive }"
-          custom
-        >
-          <span :class="{ 'text-blue-500': isExactActive }" @click="navigate"
-            >Colors</span
-          >
-        </router-link>
-        <template v-if="urlBase === 'second'">
+        <template v-for="route in routes">
           <router-link
+            :key="route.path"
             class="border p-1 rounded cursor-pointer"
-            to="/second-page-only"
+            :to="route.path"
             v-slot="{ navigate, isExactActive }"
             custom
           >
-            <span :class="{ 'text-blue-500': isExactActive }" @click="navigate"
-              >Second Page Specific Route</span
+            <span
+              :class="{ 'text-blue-500': isExactActive }"
+              @click="navigate"
+              >{{ route.name }}</span
             >
           </router-link>
         </template>
@@ -92,9 +65,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import Vue from "vue";
-export default Vue.extend({
+<script>
+export default {
   created() {
     console.log(
       window.location.pathname,
@@ -105,12 +77,19 @@ export default Vue.extend({
   data() {
     const path = window.location.pathname;
     const parts = path.split("/");
+    const routes = this.$router.options.routes.map(route => {
+      return {
+        name: route.name,
+        path: route.path
+      };
+    });
     return {
       path,
-      urlBase: parts.length > 2 ? parts[1] : ""
+      urlBase: parts.length > 2 ? parts[1] : "",
+      routes
     };
   }
-});
+};
 </script>
 <style lang="scss">
 #app {
